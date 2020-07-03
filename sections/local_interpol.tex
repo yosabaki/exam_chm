@@ -1,0 +1,23 @@
+Первым способом будет явно задать для каждого $x_i$ значения первой производной $s_i$ (которые, как замечено ранее, равны $b_i$) интерполяционных полиномов $P_{3,i}$, которые достигаются на концах интервалов $[x_{i-1}, x_i]$.
+\begin{equation}
+    P_{3,i}' (x_{i-1}) = s_{i-1} = b_{i-1},\  P_{3,i}' (x_i) = s_i = b_i,\ i = 1 \dots n			\label{Eq:local_interpol}
+\end{equation}
+Из \eqref{Eq:local_interpol} выводится условие непрерывности первой производной функции $S_3$:
+\begin{equation*}
+    P_{3,i}' (x_{i-1}) = P_{3,i+1}' (x_i) = s_i = b_i,\ i = 1\dots n-1
+\end{equation*}
+Решая систему уравнений \eqref{Eq:spline_3} и \eqref{Eq:local_interpol}, мы находим полиномы $P_{3,i}$
+\begin{equation}
+\begin{split}
+    P_{3,i} (x) & =
+    \frac{(x-x_i)^2 [2 (x-x_{i-1}) + (x_i-x_{i-1})]} {(x_i-x_{i-1})^3}
+    \cdot y_{i-1} \\
+    & + \frac{(x-x_{i-1} )^2 [2(x_i-x)+(x_i-x_{i-1} )]} {(x_i-x_{i-1} )^3}
+    \cdot y_i \\
+	& + \frac {(x-x_i )^2 (x-x_{i-1} )}{(x_i-x_{i-1} )^2} 
+	\cdot  s_{i-1} \\
+	& +	\frac{(x-x_{i-1} )^2 (x-x_i )} {(x_i-x_{i-1} )^2}
+	\cdot s_i
+\end{split}
+\end{equation}
+	Построенный сплайн имеет степень гладкости $p=1$ и дефект $n-p=2$.
